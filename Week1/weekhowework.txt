@@ -1,0 +1,822 @@
+1. create a database **world**
+
+
+mysql>show databases;
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| new_world          |
+| performance_schema |
+| sys                |
+| userdb             |
+| world              |
++--------------------+
+7 rows in set (1.56 sec)
+
+2. create a table country
+3. create a table city 
+
+mysql> show tables
+    -> ;
++-----------------+
+| Tables_in_world |
++-----------------+
+| city            |
+| country         |
++-----------------+
+2 rows in set (0.33 sec)
+
+4. Insert 10-20 rows in each table with relevant fields. 
+mysql> select * from city;
++-------------+-------------+---------------+
+| name        | cities      | continent     |
++-------------+-------------+---------------+
+| Sweden      | Stockholm   | Europe        |
+| Finaland    | Helsingfors | Europe        |
+| Netherland  | Amsterdam   | Europe        |
+| Switzerland | Geneva      | Europe        |
+| India       | Delhi       | Asia          |
+| USA         | New york    | North America |
+| Kenya       | Nairobi     | Africa        |
+| Australia   | Canbera     | Australia     |
++-------------+-------------+---------------+
+8 rows in set (1.35 sec)
+
+mysql> select * from country;
++-------------+------------+-------------+
+| name        | population | cities      |
++-------------+------------+-------------+
+| Sweden      |    9995000 | Stockholm   |
+| Finland     |    5503000 | Helsingfors |
+| Netherland  |   17336891 | Amsterdam   |
+| Switzerland |    8570146 | Geneva      |
+| India       | 1324171354 | Delhi       |
+| USA         |    3270000 | New York    |
+| Kenya       |    4970000 | Nairobi     |
+| Australia   |   25508800 | canbera     |
++-------------+------------+-------------+
+8 rows in set (0.30 sec)
+
+
+mysql> use new_world;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_new_world |
++---------------------+
+| city                |
+| country             |
+| countrylanguage     |
++---------------------+
+3 rows in set (0.01 sec)
+---------------------------------------------------------------------------------------------------------------------
+1. What are the names of countries with population greater than 8 million
+
+mysql> select Name,Population from country where Population > 8000000;
++---------------------------------------+------------+
+| Name                                  | Population |
++---------------------------------------+------------+
+| Afghanistan                           |   22720000 |
+| Angola                                |   12878000 |
+| Argentina                             |   37032000 |
+| Australia                             |   18886000 |
+| Austria                               |    8091800 |
+| Belgium                               |   10239000 |
+| Burkina Faso                          |   11937000 |
+| Bangladesh                            |  129155000 |
+| Bulgaria                              |    8190900 |
+| Belarus                               |   10236000 |
+| Bolivia                               |    8329000 |
+| Brazil                                |  170115000 |
+| Canada                                |   31147000 |
+| Chile                                 |   15211000 |
+| China                                 | 1277558000 |
+| Côte d?Ivoire                         |   14786000 |
+| Cameroon                              |   15085000 |
+| Congo, The Democratic Republic of the |   51654000 |
+| Colombia                              |   42321000 |
+| Cuba                                  |   11201000 |
+| Czech Republic                        |   10278100 |
+| Germany                               |   82164700 |
+| Dominican Republic                    |    8495000 |
+| Algeria                               |   31471000 |
+| Ecuador                               |   12646000 |
+| Egypt                                 |   68470000 |
+| Spain                                 |   39441700 |
+| Ethiopia                              |   62565000 |
+| France                                |   59225700 |
+| United Kingdom                        |   59623400 |
+| Ghana                                 |   20212000 |
+| Greece                                |   10545700 |
+| Guatemala                             |   11385000 |
+| Haiti                                 |    8222000 |
+| Hungary                               |   10043200 |
+| Indonesia                             |  212107000 |
+| India                                 | 1013662000 |
+| Iran                                  |   67702000 |
+| Iraq                                  |   23115000 |
+| Italy                                 |   57680000 |
+| Japan                                 |  126714000 |
+| Kazakstan                             |   16223000 |
+| Kenya                                 |   30080000 |
+| Cambodia                              |   11168000 |
+| South Korea                           |   46844000 |
+| Sri Lanka                             |   18827000 |
+| Morocco                               |   28351000 |
+| Madagascar                            |   15942000 |
+| Mexico                                |   98881000 |
+| Mali                                  |   11234000 |
+| Myanmar                               |   45611000 |
+| Mozambique                            |   19680000 |
+| Malawi                                |   10925000 |
+| Malaysia                              |   22244000 |
+| Niger                                 |   10730000 |
+| Nigeria                               |  111506000 |
+| Netherlands                           |   15864000 |
+| Nepal                                 |   23930000 |
+| Pakistan                              |  156483000 |
+| Peru                                  |   25662000 |
+| Philippines                           |   75967000 |
+| Poland                                |   38653600 |
+| North Korea                           |   24039000 |
+| Portugal                              |    9997600 |
+| Romania                               |   22455500 |
+| Russian Federation                    |  146934000 |
+| Saudi Arabia                          |   21607000 |
+| Sudan                                 |   29490000 |
+| Senegal                               |    9481000 |
+| Somalia                               |   10097000 |
+| Sweden                                |    8861400 |
+| Syria                                 |   16125000 |
+| Thailand                              |   61399000 |
+| Tunisia                               |    9586000 |
+| Turkey                                |   66591000 |
+| Taiwan                                |   22256000 |
+| Tanzania                              |   33517000 |
+| Uganda                                |   21778000 |
+| Ukraine                               |   50456000 |
+| United States                         |  278357000 |
+| Uzbekistan                            |   24318000 |
+| Venezuela                             |   24170000 |
+| Vietnam                               |   79832000 |
+| Yemen                                 |   18112000 |
+| Yugoslavia                            |   10640000 |
+| South Africa                          |   40377000 |
+| Zambia                                |    9169000 |
+| Zimbabwe                              |   11669000 |
++---------------------------------------+------------+
+88 rows in set (0.01 sec)
+
+2. What are the names of countries that have “land” in their names ?
+
+mysql> select Name from country where Name like '%land%';
++----------------------------------------------+
+| Name                                         |
++----------------------------------------------+
+| Netherlands Antilles                         |
+| Bouvet Island                                |
+| Cocos (Keeling) Islands                      |
+| Switzerland                                  |
+| Cook Islands                                 |
+| Christmas Island                             |
+| Cayman Islands                               |
+| Finland                                      |
+| Fiji Islands                                 |
+| Falkland Islands                             |
+| Faroe Islands                                |
+| Greenland                                    |
+| Heard Island and McDonald Islands            |
+| Ireland                                      |
+| Iceland                                      |
+| Marshall Islands                             |
+| Northern Mariana Islands                     |
+| Norfolk Island                               |
+| Netherlands                                  |
+| New Zealand                                  |
+| Poland                                       |
+| South Georgia and the South Sandwich Islands |
+| Solomon Islands                              |
+| Swaziland                                    |
+| Turks and Caicos Islands                     |
+| Thailand                                     |
+| United States Minor Outlying Islands         |
+| Virgin Islands, British                      |
+| Virgin Islands, U.S.                         |
++----------------------------------------------+
+29 rows in set (0.02 sec)
+
+3. What are the names of the cities with population in between 500,000 and 1 million ?
+
+mysql> select Name,Population from city where population > 1000000 and population < 5000000;
++-------------------------+------------+
+| Name                    | Population |
++-------------------------+------------+
+| Kabul                   |    1780000 |
+| Alger                   |    2168000 |
+| Luanda                  |    2022000 |
+| Buenos Aires            |    2982146 |
+| La Matanza              |    1266461 |
+| Córdoba                 |    1157507 |
+| Yerevan                 |    1248700 |
+| Sydney                  |    3276207 |
+| Melbourne               |    2865329 |
+| Brisbane                |    1291117 |
+| Perth                   |    1096829 |
+| Baku                    |    1787800 |
+| Dhaka                   |    3612850 |
+| Chittagong              |    1392860 |
+| Salvador                |    2302832 |
+| Belo Horizonte          |    2139125 |
+| Fortaleza               |    2097757 |
+| Brasília                |    1969868 |
+| Curitiba                |    1584232 |
+| Recife                  |    1378087 |
+| Porto Alegre            |    1314032 |
+| Manaus                  |    1255049 |
+| Belém                   |    1186926 |
+| Guarulhos               |    1095874 |
+| Goiânia                 |    1056330 |
+| Birmingham              |    1013000 |
+| Sofija                  |    1122302 |
+| Santiago de Chile       |    4703954 |
+| Santo Domingo de Guzmán |    1609966 |
+| Guayaquil               |    2070040 |
+| Quito                   |    1573458 |
+| Alexandria              |    3328196 |
+| Giza                    |    2221868 |
+| Madrid                  |    2879052 |
+| Barcelona               |    1503451 |
+| Cape Town               |    2352121 |
+| Addis Abeba             |    2495000 |
+| Quezon                  |    2173831 |
+| Manila                  |    1581082 |
+| Kalookan                |    1177604 |
+| Davao                   |    1147116 |
+| Tbilisi                 |    1235200 |
+| Accra                   |    1070000 |
+| Conakry                 |    1090610 |
+| Kowloon and New Kowloon |    1987996 |
+| Victoria                |    1312637 |
+| Surabaya                |    2663820 |
+| Bandung                 |    2429000 |
+| Medan                   |    1843919 |
+| Palembang               |    1222764 |
+| Tangerang               |    1198300 |
+| Semarang                |    1104405 |
+| Ujung Pandang           |    1060257 |
+| Calcutta [Kolkata]      |    4399819 |
+| Chennai (Madras)        |    3841396 |
+| Hyderabad               |    2964638 |
+| Ahmedabad               |    2876710 |
+| Bangalore               |    2660088 |
+| Kanpur                  |    1874409 |
+| Nagpur                  |    1624752 |
+| Lucknow                 |    1619115 |
+| Pune                    |    1566651 |
+| Surat                   |    1498817 |
+| Jaipur                  |    1458483 |
+| Indore                  |    1091674 |
+| Bhopal                  |    1062771 |
+| Ludhiana                |    1042740 |
+| Vadodara (Baroda)       |    1031346 |
+| Kalyan                  |    1014557 |
+| Baghdad                 |    4336000 |
+| Mashhad                 |    1887405 |
+| Esfahan                 |    1266072 |
+| Tabriz                  |    1191043 |
+| Shiraz                  |    1053025 |
+| Roma                    |    2643581 |
+| Milano                  |    1300977 |
+| Napoli                  |    1002619 |
+| Wien                    |    1608144 |
+| Jokohama [Yokohama]     |    3339594 |
+| Osaka                   |    2595674 |
+| Nagoya                  |    2154376 |
+| Sapporo                 |    1790886 |
+| Kioto                   |    1461974 |
+| Kobe                    |    1425139 |
+| Fukuoka                 |    1308379 |
+| Kawasaki                |    1217359 |
+| Hiroshima               |    1119117 |
+| Kitakyushu              |    1016264 |
+| Beograd                 |    1204000 |
+| Douala                  |    1448300 |
+| Yaoundé                 |    1372800 |
+| Montréal                |    1016376 |
+| Almaty                  |    1129400 |
+| Nairobi                 |    2290000 |
+| Wuhan                   |    4344600 |
+| Harbin                  |    4289800 |
+| Shenyang                |    4265200 |
+| Kanton [Guangzhou]      |    4256300 |
+| Chengdu                 |    3361500 |
+| Nanking [Nanjing]       |    2870300 |
+| Changchun               |    2812000 |
+| Xi´an                   |    2761400 |
+| Dalian                  |    2697000 |
+| Qingdao                 |    2596000 |
+| Jinan                   |    2278100 |
+| Hangzhou                |    2190500 |
+| Zhengzhou               |    2107200 |
+| Shijiazhuang            |    2041500 |
+| Taiyuan                 |    1968400 |
+| Kunming                 |    1829500 |
+| Changsha                |    1809800 |
+| Nanchang                |    1691600 |
+| Fuzhou                  |    1593800 |
+| Lanzhou                 |    1565800 |
+| Guiyang                 |    1465200 |
+| Ningbo                  |    1371200 |
+| Hefei                   |    1369100 |
+| Urumt?i [Ürümqi]        |    1310100 |
+| Anshan                  |    1200000 |
+| Fushun                  |    1200000 |
+| Nanning                 |    1161800 |
+| Zibo                    |    1140000 |
+| Qiqihar                 |    1070000 |
+| Jilin                   |    1040000 |
+| Tangshan                |    1040000 |
+| Cali                    |    2077386 |
+| Medellín                |    1861265 |
+| Barranquilla            |    1223260 |
+| Pyongyang               |    2484000 |
+| Pusan                   |    3804522 |
+| Inchon                  |    2559424 |
+| Taegu                   |    2548568 |
+| Taejon                  |    1425835 |
+| Kwangju                 |    1368341 |
+| Ulsan                   |    1084891 |
+| La Habana               |    2256000 |
+| Beirut                  |    1100000 |
+| Tripoli                 |    1682000 |
+| Kuala Lumpur            |    1297526 |
+| Casablanca              |    2940623 |
+| Guadalajara             |    1647720 |
+| Ecatepec de Morelos     |    1620303 |
+| Puebla                  |    1346176 |
+| Nezahualcóyotl          |    1224924 |
+| Juárez                  |    1217818 |
+| Tijuana                 |    1212232 |
+| León                    |    1133576 |
+| Monterrey               |    1108499 |
+| Zapopan                 |    1002239 |
+| Maputo                  |    1018938 |
+| Rangoon (Yangon)        |    3361700 |
+| Lagos                   |    1518000 |
+| Ibadan                  |    1432000 |
+| Abidjan                 |    2500000 |
+| Faisalabad              |    1977246 |
+| Rawalpindi              |    1406214 |
+| Multan                  |    1182441 |
+| Hyderabad               |    1151274 |
+| Gujranwala              |    1124749 |
+| Warszawa                |    1615369 |
+| Paris                   |    2125246 |
+| Bucuresti               |    2016131 |
+| Berlin                  |    3386667 |
+| Hamburg                 |    1704735 |
+| Munich [München]        |    1194560 |
+| Lusaka                  |    1317000 |
+| Riyadh                  |    3324000 |
+| Jedda                   |    2046300 |
+| Singapore               |    4017733 |
+| Omdurman                |    1271403 |
+| Damascus                |    1347000 |
+| Aleppo                  |    1261983 |
+| Taipei                  |    2641312 |
+| Kaohsiung               |    1475505 |
+| Dar es Salaam           |    1747000 |
+| Praha                   |    1181126 |
+| Ankara                  |    3038159 |
+| Izmir                   |    2130359 |
+| Adana                   |    1131198 |
+| Bursa                   |    1095842 |
+| Kyiv                    |    2624000 |
+| Harkova [Harkiv]        |    1500000 |
+| Dnipropetrovsk          |    1103000 |
+| Donetsk                 |    1050000 |
+| Odesa                   |    1011000 |
+| Budapest                |    1811552 |
+| Montevideo              |    1236000 |
+| Toskent                 |    2117500 |
+| Minsk                   |    1674000 |
+| Caracas                 |    1975294 |
+| Maracaíbo               |    1304776 |
+| St Petersburg           |    4694000 |
+| Novosibirsk             |    1398800 |
+| Nizni Novgorod          |    1357000 |
+| Jekaterinburg           |    1266300 |
+| Samara                  |    1156100 |
+| Omsk                    |    1148900 |
+| Kazan                   |    1101000 |
+| Ufa                     |    1091200 |
+| T?eljabinsk             |    1083200 |
+| Rostov-na-Donu          |    1012700 |
+| Perm                    |    1009700 |
+| Ho Chi Minh City        |    3980000 |
+| Hanoi                   |    1410000 |
+| Los Angeles             |    3694820 |
+| Chicago                 |    2896016 |
+| Houston                 |    1953631 |
+| Philadelphia            |    1517550 |
+| Phoenix                 |    1321045 |
+| San Diego               |    1223400 |
+| Dallas                  |    1188580 |
+| San Antonio             |    1144646 |
+| Harare                  |    1410000 |
++-------------------------+------------+
+213 rows in set (0.01 sec)
+
+mysql>
+4. What's the name of all the countries on the continent ‘Europe’ ?
+mysql> select Name,Continent from country where continent = 'Europe';
++-------------------------------+-----------+
+| Name                          | Continent |
++-------------------------------+-----------+
+| Albania                       | Europe    |
+| Andorra                       | Europe    |
+| Austria                       | Europe    |
+| Belgium                       | Europe    |
+| Bulgaria                      | Europe    |
+| Bosnia and Herzegovina        | Europe    |
+| Belarus                       | Europe    |
+| Switzerland                   | Europe    |
+| Czech Republic                | Europe    |
+| Germany                       | Europe    |
+| Denmark                       | Europe    |
+| Spain                         | Europe    |
+| Estonia                       | Europe    |
+| Finland                       | Europe    |
+| France                        | Europe    |
+| Faroe Islands                 | Europe    |
+| United Kingdom                | Europe    |
+| Gibraltar                     | Europe    |
+| Greece                        | Europe    |
+| Croatia                       | Europe    |
+| Hungary                       | Europe    |
+| Ireland                       | Europe    |
+| Iceland                       | Europe    |
+| Italy                         | Europe    |
+| Liechtenstein                 | Europe    |
+| Lithuania                     | Europe    |
+| Luxembourg                    | Europe    |
+| Latvia                        | Europe    |
+| Monaco                        | Europe    |
+| Moldova                       | Europe    |
+| Macedonia                     | Europe    |
+| Malta                         | Europe    |
+| Netherlands                   | Europe    |
+| Norway                        | Europe    |
+| Poland                        | Europe    |
+| Portugal                      | Europe    |
+| Romania                       | Europe    |
+| Russian Federation            | Europe    |
+| Svalbard and Jan Mayen        | Europe    |
+| San Marino                    | Europe    |
+| Slovakia                      | Europe    |
+| Slovenia                      | Europe    |
+| Sweden                        | Europe    |
+| Ukraine                       | Europe    |
+| Holy See (Vatican City State) | Europe    |
+| Yugoslavia                    | Europe    |
++-------------------------------+-----------+
+46 rows in set (0.00 sec)
+5. List all the countries in the descending order of their surface areas.
+
+mysql> select name,surfacearea from country order by surfacearea desc;
++----------------------------------------------+-------------+
+| name                                         | surfacearea |
++----------------------------------------------+-------------+
+| Russian Federation                           | 17075400.00 |
+| Antarctica                                   | 13120000.00 |
+| Canada                                       |  9970610.00 |
+| China                                        |  9572900.00 |
+| United States                                |  9363520.00 |
+| Brazil                                       |  8547403.00 |
+| Australia                                    |  7741220.00 |
+| India                                        |  3287263.00 |
+| Argentina                                    |  2780400.00 |
+| Kazakstan                                    |  2724900.00 |
+| Sudan                                        |  2505813.00 |
+| Algeria                                      |  2381741.00 |
+| Congo, The Democratic Republic of the        |  2344858.00 |
+| Greenland                                    |  2166090.00 |
+| Saudi Arabia                                 |  2149690.00 |
+| Mexico                                       |  1958201.00 |
+| Indonesia                                    |  1904569.00 |
+| Libyan Arab Jamahiriya                       |  1759540.00 |
+| Iran                                         |  1648195.00 |
+| Mongolia                                     |  1566500.00 |
+| Peru                                         |  1285216.00 |
+| Chad                                         |  1284000.00 |
+| Niger                                        |  1267000.00 |
+| Angola                                       |  1246700.00 |
+| Mali                                         |  1240192.00 |
+| South Africa                                 |  1221037.00 |
+| Colombia                                     |  1138914.00 |
+| Ethiopia                                     |  1104300.00 |
+| Bolivia                                      |  1098581.00 |
+| Mauritania                                   |  1025520.00 |
+| Egypt                                        |  1001449.00 |
+| Nigeria                                      |   923768.00 |
+| Venezuela                                    |   912050.00 |
+| Tanzania                                     |   883749.00 |
+| Namibia                                      |   824292.00 |
+| Mozambique                                   |   801590.00 |
+| Pakistan                                     |   796095.00 |
+| Turkey                                       |   774815.00 |
+| Chile                                        |   756626.00 |
+| Zambia                                       |   752618.00 |
+| Myanmar                                      |   676578.00 |
+| Afghanistan                                  |   652090.00 |
+| Somalia                                      |   637657.00 |
+| Central African Republic                     |   622984.00 |
+| Ukraine                                      |   603700.00 |
+| Madagascar                                   |   587041.00 |
+| Botswana                                     |   581730.00 |
+| Kenya                                        |   580367.00 |
+| France                                       |   551500.00 |
+| Yemen                                        |   527968.00 |
+| Thailand                                     |   513115.00 |
+| Spain                                        |   505992.00 |
+| Turkmenistan                                 |   488100.00 |
+| Cameroon                                     |   475442.00 |
+| Papua New Guinea                             |   462840.00 |
+| Sweden                                       |   449964.00 |
+| Uzbekistan                                   |   447400.00 |
+| Morocco                                      |   446550.00 |
+| Iraq                                         |   438317.00 |
+| Paraguay                                     |   406752.00 |
+| Zimbabwe                                     |   390757.00 |
+| Japan                                        |   377829.00 |
+| Germany                                      |   357022.00 |
+| Congo                                        |   342000.00 |
+| Finland                                      |   338145.00 |
+| Vietnam                                      |   331689.00 |
+| Malaysia                                     |   329758.00 |
+| Norway                                       |   323877.00 |
+| Poland                                       |   323250.00 |
+| Côte d?Ivoire                                |   322463.00 |
+| Oman                                         |   309500.00 |
+| Italy                                        |   301316.00 |
+| Philippines                                  |   300000.00 |
+| Ecuador                                      |   283561.00 |
+| Burkina Faso                                 |   274000.00 |
+| New Zealand                                  |   270534.00 |
+| Gabon                                        |   267668.00 |
+| Western Sahara                               |   266000.00 |
+| Guinea                                       |   245857.00 |
+| United Kingdom                               |   242900.00 |
+| Uganda                                       |   241038.00 |
+| Ghana                                        |   238533.00 |
+| Romania                                      |   238391.00 |
+| Laos                                         |   236800.00 |
+| Guyana                                       |   214969.00 |
+| Belarus                                      |   207600.00 |
+| Kyrgyzstan                                   |   199900.00 |
+| Senegal                                      |   196722.00 |
+| Syria                                        |   185180.00 |
+| Cambodia                                     |   181035.00 |
+| Uruguay                                      |   175016.00 |
+| Tunisia                                      |   163610.00 |
+| Suriname                                     |   163265.00 |
+| Nepal                                        |   147181.00 |
+| Bangladesh                                   |   143998.00 |
+| Tajikistan                                   |   143100.00 |
+| Greece                                       |   131626.00 |
+| Nicaragua                                    |   130000.00 |
+| North Korea                                  |   120538.00 |
+| Malawi                                       |   118484.00 |
+| Eritrea                                      |   117600.00 |
+| Benin                                        |   112622.00 |
+| Honduras                                     |   112088.00 |
+| Liberia                                      |   111369.00 |
+| Bulgaria                                     |   110994.00 |
+| Cuba                                         |   110861.00 |
+| Guatemala                                    |   108889.00 |
+| Iceland                                      |   103000.00 |
+| Yugoslavia                                   |   102173.00 |
+| South Korea                                  |    99434.00 |
+| Hungary                                      |    93030.00 |
+| Portugal                                     |    91982.00 |
+| French Guiana                                |    90000.00 |
+| Jordan                                       |    88946.00 |
+| Azerbaijan                                   |    86600.00 |
+| Austria                                      |    83859.00 |
+| United Arab Emirates                         |    83600.00 |
+| Czech Republic                               |    78866.00 |
+| Panama                                       |    75517.00 |
+| Sierra Leone                                 |    71740.00 |
+| Ireland                                      |    70273.00 |
+| Georgia                                      |    69700.00 |
+| Sri Lanka                                    |    65610.00 |
+| Lithuania                                    |    65301.00 |
+| Latvia                                       |    64589.00 |
+| Svalbard and Jan Mayen                       |    62422.00 |
+| Togo                                         |    56785.00 |
+| Croatia                                      |    56538.00 |
+| Bosnia and Herzegovina                       |    51197.00 |
+| Costa Rica                                   |    51100.00 |
+| Slovakia                                     |    49012.00 |
+| Dominican Republic                           |    48511.00 |
+| Bhutan                                       |    47000.00 |
+| Estonia                                      |    45227.00 |
+| Denmark                                      |    43094.00 |
+| Netherlands                                  |    41526.00 |
+| Switzerland                                  |    41284.00 |
+| Taiwan                                       |    36188.00 |
+| Guinea-Bissau                                |    36125.00 |
+| Moldova                                      |    33851.00 |
+| Belgium                                      |    30518.00 |
+| Lesotho                                      |    30355.00 |
+| Armenia                                      |    29800.00 |
+| Solomon Islands                              |    28896.00 |
+| Albania                                      |    28748.00 |
+| Equatorial Guinea                            |    28051.00 |
+| Burundi                                      |    27834.00 |
+| Haiti                                        |    27750.00 |
+| Rwanda                                       |    26338.00 |
+| Macedonia                                    |    25713.00 |
+| Djibouti                                     |    23200.00 |
+| Belize                                       |    22696.00 |
+| Israel                                       |    21056.00 |
+| El Salvador                                  |    21041.00 |
+| Slovenia                                     |    20256.00 |
+| New Caledonia                                |    18575.00 |
+| Fiji Islands                                 |    18274.00 |
+| Kuwait                                       |    17818.00 |
+| Swaziland                                    |    17364.00 |
+| East Timor                                   |    14874.00 |
+| Bahamas                                      |    13878.00 |
+| Vanuatu                                      |    12189.00 |
+| Falkland Islands                             |    12173.00 |
+| Gambia                                       |    11295.00 |
+| Qatar                                        |    11000.00 |
+| Jamaica                                      |    10990.00 |
+| Lebanon                                      |    10400.00 |
+| Cyprus                                       |     9251.00 |
+| Puerto Rico                                  |     8875.00 |
+| French Southern territories                  |     7780.00 |
+| Palestine                                    |     6257.00 |
+| Brunei                                       |     5765.00 |
+| Trinidad and Tobago                          |     5130.00 |
+| Cape Verde                                   |     4033.00 |
+| French Polynesia                             |     4000.00 |
+| South Georgia and the South Sandwich Islands |     3903.00 |
+| Samoa                                        |     2831.00 |
+| Luxembourg                                   |     2586.00 |
+| Réunion                                      |     2510.00 |
+| Mauritius                                    |     2040.00 |
+| Comoros                                      |     1862.00 |
+| Guadeloupe                                   |     1705.00 |
+| Faroe Islands                                |     1399.00 |
+| Martinique                                   |     1102.00 |
+| Hong Kong                                    |     1075.00 |
+| Sao Tome and Principe                        |      964.00 |
+| Netherlands Antilles                         |      800.00 |
+| Dominica                                     |      751.00 |
+| Kiribati                                     |      726.00 |
+| Micronesia, Federated States of              |      702.00 |
+| Bahrain                                      |      694.00 |
+| Tonga                                        |      650.00 |
+| Saint Lucia                                  |      622.00 |
+| Singapore                                    |      618.00 |
+| Guam                                         |      549.00 |
+| Andorra                                      |      468.00 |
+| Northern Mariana Islands                     |      464.00 |
+| Palau                                        |      459.00 |
+| Seychelles                                   |      455.00 |
+| Antigua and Barbuda                          |      442.00 |
+| Barbados                                     |      430.00 |
+| Turks and Caicos Islands                     |      430.00 |
+| Saint Vincent and the Grenadines             |      388.00 |
+| Mayotte                                      |      373.00 |
+| Heard Island and McDonald Islands            |      359.00 |
+| Virgin Islands, U.S.                         |      347.00 |
+| Grenada                                      |      344.00 |
+| Malta                                        |      316.00 |
+| Saint Helena                                 |      314.00 |
+| Maldives                                     |      298.00 |
+| Cayman Islands                               |      264.00 |
+| Saint Kitts and Nevis                        |      261.00 |
+| Niue                                         |      260.00 |
+| Saint Pierre and Miquelon                    |      242.00 |
+| Cook Islands                                 |      236.00 |
+| Wallis and Futuna                            |      200.00 |
+| American Samoa                               |      199.00 |
+| Aruba                                        |      193.00 |
+| Marshall Islands                             |      181.00 |
+| Liechtenstein                                |      160.00 |
+| Virgin Islands, British                      |      151.00 |
+| Christmas Island                             |      135.00 |
+| Montserrat                                   |      102.00 |
+| Anguilla                                     |       96.00 |
+| British Indian Ocean Territory               |       78.00 |
+| San Marino                                   |       61.00 |
+| Bouvet Island                                |       59.00 |
+| Bermuda                                      |       53.00 |
+| Pitcairn                                     |       49.00 |
+| Norfolk Island                               |       36.00 |
+| Tuvalu                                       |       26.00 |
+| Nauru                                        |       21.00 |
+| Macao                                        |       18.00 |
+| United States Minor Outlying Islands         |       16.00 |
+| Cocos (Keeling) Islands                      |       14.00 |
+| Tokelau                                      |       12.00 |
+| Gibraltar                                    |        6.00 |
+| Monaco                                       |        1.50 |
+| Holy See (Vatican City State)                |        0.40 |
++----------------------------------------------+-------------+
+239 rows in set (0.07 sec)
+
+mysql>
+6. What are the names of all the cities in the Netherlands?
+
+mysql> select city.name,city.population,country.code from city inner join country on  country.code = city.countrycode;
++-----------------------------------+------------+------+
+| name                              | population | code |
++-----------------------------------+------------+------+
+| Oranjestad                        |      29034 | ABW  |
+| Kabul                             |    1780000 | AFG  |
+| Qandahar                          |     237500 | AFG  |
+| Herat                             |     186800 | AFG  |
+| Mazar-e-Sharif                    |     127800 | AFG  |
+| Luanda                            |    2022000 | AGO  |
+| Huambo                            |     163100 | AGO  |
+| Lobito                            |     130000 | AGO  |
+| Benguela                          |     128300 | AGO  |
+| Namibe                            |     118200 | AGO  |
+| South Hill                        |        961 | AIA  |
+| The Valley                        |        595 | AIA  |
+| Tirana                            |     270000 | ALB  |
+| Andorra la Vella                  |      21189 | AND  |
+| Willemstad                        |       2345 | ANT  |
+-------
+4079 rows selected
+
+7. What is the population of Rotterdam ?
+
+mysql> select * from city where name='Rotterdam';
++----+-----------+-------------+--------------+------------+
+| ID | Name      | CountryCode | District     | Population |
++----+-----------+-------------+--------------+------------+
+|  6 | Rotterdam | NLD         | Zuid-Holland |     593321 |
++----+-----------+-------------+--------------+------------+
+1 row in set (0.01 sec)
+
+8. What's the top 10 countries by Surface Area ?
+
+
+mysql> select name,surfacearea from country order by surfacearea desc limit 10;
++--------------------+-------------+
+| name               | surfacearea |
++--------------------+-------------+
+| Russian Federation | 17075400.00 |
+| Antarctica         | 13120000.00 |
+| Canada             |  9970610.00 |
+| China              |  9572900.00 |
+| United States      |  9363520.00 |
+| Brazil             |  8547403.00 |
+| Australia          |  7741220.00 |
+| India              |  3287263.00 |
+| Argentina          |  2780400.00 |
+| Kazakstan          |  2724900.00 |
++--------------------+-------------+
+
+10 rows in set (0.00 sec)
+
+9. What's the top 10 most populated cities?
+mysql> select name,population from city order by population desc limit 10;
++------------------+------------+
+| name             | population |
++------------------+------------+
+| Mumbai (Bombay)  |   10500000 |
+| Seoul            |    9981619 |
+| São Paulo        |    9968485 |
+| Shanghai         |    9696300 |
+| Jakarta          |    9604900 |
+| Karachi          |    9269265 |
+| Istanbul         |    8787958 |
+| Ciudad de México |    8591309 |
+| Moscow           |    8389200 |
+| New York         |    8008278 |
++------------------+------------+
+10 rows in set (0.01 sec)
+10. What is the population of the world ?
+
+mysql> select sum(population) from country;
++-----------------+
+| sum(population) |
++-----------------+
+|      6078749450 |
++-----------------+
+1 row in set (0.07 sec)
+
+
+
+
+
+
